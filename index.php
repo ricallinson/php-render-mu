@@ -2,9 +2,9 @@
 namespace php_require\php_render_mu;
 
 require(__DIR__. "/mu/src/mustache/Autoloader.php");
-Mustache_Autoloader::register();
+\Mustache_Autoloader::register();
 
-$m = new Mustache_Engine();
+$m = new \Mustache_Engine();
 
 $module->exports = function ($filename, $data, $callback) use ($m) {
 
