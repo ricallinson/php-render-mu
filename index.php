@@ -6,16 +6,19 @@ require(__DIR__. "/mu/src/mustache/Autoloader.php");
 
 $m = new \Mustache_Engine();
 
-$module->exports = function ($filename, $data, $callback) use ($m) {
+$module->exports = function ($filename, $data=array(), $callback=null) use ($m) {
 
     ob_start();
-    // extract($data);
-
     if (isset($data["start"])) {
         $data["end"] = (microtime(true) - $data["start"]) / 1000;
     }
 
     $buffer = $m->render(file_get_contents($filename), $data);
     ob_end_clean();
-    $callback(null, $buffer);
+    
+    if ($callback) {
+        $callback(null, $buffer);
+    }
+
+    return $buffer;
 };
